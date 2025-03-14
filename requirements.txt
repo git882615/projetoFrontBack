@@ -1,0 +1,10 @@
+robotframework==7.2.2
+robotframework-assertion-engine==3.0.3
+robotframework-browser==19.3.1
+robotframework-databaselibrary==2.1.1
+robotframework-difflibrary==0.1.0
+robotframework-jsonlibrary==0.5
+robotframework-pabot==4.1.1
+robotframework-pythonlibcore==4.4.1
+robotframework-requests==0.9.7
+robotframework-stacktrace==0.4.1
