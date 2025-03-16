@@ -26,7 +26,7 @@ Iniciar Browser
     New Page       url=${BASE_URL}    wait_until=domcontentloaded     
 
 Finalizar Browser
-    Take Screenshot    fullPage=true
+    Run Keyword If    $IS_HEADLESS == $False    Take Screenshot    fullPage=true
 
 Convert Currency To Number
     [Arguments]    ${currency_string}
