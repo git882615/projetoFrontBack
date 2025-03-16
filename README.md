@@ -5,11 +5,12 @@ Este projeto contém testes automatizados para a API ViaCEP e para o site www.ka
 ## Pré-requisitos
 
 - Python 3.13 ou superior (python --version)
-- Git (git --version)
+- Git 2.46 ou superior (git --version)
+- Node.js 20.17 ou superior (node --version)
 
 - **Site para baixar o Python**: https://www.python.org/downloads/
 - **Site para baixar o Git**: https://git-scm.com/downloads
-
+- **Site para baixar o Node**: https://nodejs.org/pt/download
 
 ## Instalação
 
@@ -22,6 +23,9 @@ git clone https://github.com/git882615/projetoFrontBack
 Windows > cd projetoFrontBack
 ```
 3. Instale as dependências:
+```
+python -m pip install --upgrade pip
+```
 ```
 pip install -r requirements.txt
 ```
@@ -131,13 +135,9 @@ Os testes cobrem:
 - Fluxos de navegação e interação no site da Kabum, como adicionar um produto no carriho.
 
 ## ✍️ Autores <a name = "autores"></a>
-### [@Eliakim Cordeiro](https://www.linkedin.com/in/eliakim-cordeiro-343464112/) - Trabalho inicial
+### [@Eliakim Cordeiro](https://www.linkedin.com/in/eliakim-cordeiro-343464112/) 
 
 ## 📌 Links do Robot Framework
 
 *  [Robot Framework](https://robotframework.org/)
 *  [Robot Framework documentation](https://robotframework.org/robotframework/)
-
-## Contribuindo
-
-Sinta-se à vontade para contribuir com este projeto. 
