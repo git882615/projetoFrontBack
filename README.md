@@ -42,6 +42,11 @@ projetofrontback
 ├── README.md
 ├── requirements.txt
 │
+├── .github
+│   ├── workflows
+│   │   ├── tests.yml
+│   │   ├── tests agendados.yml
+│
 ├── resources
 │   ├── pages
 │   │   ├── home_page.resource
@@ -75,7 +80,7 @@ projetofrontback
 ```
 
 
-## Executando os Testes
+## Executando os Testes - LOCALMENTE
 
 ### Testes da API ViaCEP
 
@@ -116,6 +121,23 @@ BROWSER -> variável a ser definida na linha de comando para rodar em Browser ut
 pabot --processes 2 --testlevelsplit -v IS_HEADLESS:True --outputdir ./logs/results tests
 ```
 - No exemplo acima serão executados 2 testes em paralelo dos testes totais (API e Web) e será o resultado na pasta Results. Os artefatos do Pabot são gerados, além do artefatos do Robot. Também está sendo passando a variavel IS_HEADLESS:True para roda o teste web em modo headless, mas não é obrigatório.
+
+## Integração Contínua
+
+Este projeto utiliza GitHub Actions para integração contínua. Os testes são executados automaticamente nas seguintes situações:
+
+- Em cada push para a branch `main`
+- Em cada pull request para a branch `main`
+- Agendado para rodar às 8h da manhã UTC, de segunda a sexta-feira
+
+### Visualizando Resultados dos Testes
+
+Você pode ver os resultados dos testes mais recentes clicando no badge de status acima ou na aba "Actions" deste repositório.
+
+### Notificações
+
+Notificações sobre o status dos testes são enviadas automaticamente para um canal designado no Slack após cada execução.
+
 
 ## Sobre o Projeto
 

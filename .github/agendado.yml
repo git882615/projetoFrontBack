@@ -1,0 +1,71 @@
+name: Robot Framework Tests Agendados
+
+on:
+  schedule:
+    - cron: '0 8 * * 1-5'  # Executa às 8h da manhã UTC, de segunda a sexta
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Get Code
+      uses: actions/checkout@v4
+
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Setup Python
+      uses: actions/setup-python@v5.4.0
+      with:
+        python-version: 3.13
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Browser library
+      run: |
+        rfbrowser init
+    
+    - name: Run API tests
+      run: robot -d logs -i especifico -i falha tests/api/tests_api.robot
+    
+    - name: Run Front-end tests Chrome
+      run: |
+        robot -d logs -v BROWSER:chromium -v IS_HEADLESS:True tests/front/tests.robot
+
+    - name: Robot Reporter
+      uses: joonvena/robotframework-reporter-action@v2.5
+      if: always()
+      with:
+        gh_access_token: ${{ secrets.GITHUB_TOKEN }}     
+        report_path: logs            
+
+    - name: Upload Report Robot
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: Tests Robot
+        path: logs
+
+    - name: Enviar notificação para o Slack - Sucesso
+      uses: rtCamp/action-slack-notify@v2
+      if: ${{ success() }}
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: ${{ job.status }} 
+        SLACK_MESSAGE:  'TESTE EXECUTADO com SUCESSO! :white_check_mark:'
+        SLACK_USERNAME: GITHUB
+
+    - name: Enviar notificação para o Slack - ERRO
+      uses: rtCamp/action-slack-notify@v2
+      if: ${{ failure() }}
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: ${{ job.status }} 
+        SLACK_MESSAGE:  'TESTE EXECUTADO com ERRO! :x_red:'
+        SLACK_USERNAME: GITHUB   
